@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'judge_weather.dart';
+import 'week.dart';
 
 class TodayWeather extends StatelessWidget {
   final String? today;
@@ -17,6 +19,8 @@ class TodayWeather extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final weekDay = Week(date: today!).getWeekday();
+
     return Container(
       width: 400,
       height: 150,
@@ -38,10 +42,16 @@ class TodayWeather extends StatelessWidget {
           Positioned(
             top: 10,
             left: 10,
-            child: Text(
-              today != null
-                  ? '${int.parse(today!.substring(5, 7))}月${int.parse(today!.substring(8, 10))}日'
-                  : '',
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  today != null
+                      ? '${int.parse(today!.substring(5, 7))}月${int.parse(today!.substring(8, 10))}日'
+                      : '',
+                ),
+                Text('(${weekDay})'),
+              ],
             ),
           ),
           Positioned.fill(
@@ -49,7 +59,21 @@ class TodayWeather extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: Text('$temperatureMax℃/$temperatureMin℃'),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 10,
+                  children: [
+                    Text(
+                      '$temperatureMax℃',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    Text('/'),
+                    Text(
+                      '$temperatureMin℃',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
