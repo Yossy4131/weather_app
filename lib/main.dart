@@ -60,6 +60,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       border: Border.all(color: Colors.blue),
                       borderRadius: BorderRadius.circular(20),
                     ),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 24,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          spacing: 5,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('${index + 1}時'),
+                            Icon(Icons.sunny),
+                            Text('〇℃'),
+                          ],
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 400,
