@@ -22,8 +22,11 @@ WeatherData _$WeatherDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WeatherData {
   List<String> get time => throw _privateConstructorUsedError;
+  @JsonKey(name: 'temperature_2m_max')
   List<double> get temperature2mMax => throw _privateConstructorUsedError;
+  @JsonKey(name: 'temperature_2m_min')
   List<double> get temperature2mMin => throw _privateConstructorUsedError;
+  @JsonKey(name: 'precipitation_probability_max')
   List<int> get precipitationProbabilityMax =>
       throw _privateConstructorUsedError;
 
@@ -46,8 +49,9 @@ abstract class $WeatherDataCopyWith<$Res> {
   @useResult
   $Res call({
     List<String> time,
-    List<double> temperature2mMax,
-    List<double> temperature2mMin,
+    @JsonKey(name: 'temperature_2m_max') List<double> temperature2mMax,
+    @JsonKey(name: 'temperature_2m_min') List<double> temperature2mMin,
+    @JsonKey(name: 'precipitation_probability_max')
     List<int> precipitationProbabilityMax,
   });
 }
@@ -111,8 +115,9 @@ abstract class _$$WeatherDataImplCopyWith<$Res>
   @useResult
   $Res call({
     List<String> time,
-    List<double> temperature2mMax,
-    List<double> temperature2mMin,
+    @JsonKey(name: 'temperature_2m_max') List<double> temperature2mMax,
+    @JsonKey(name: 'temperature_2m_min') List<double> temperature2mMin,
+    @JsonKey(name: 'precipitation_probability_max')
     List<int> precipitationProbabilityMax,
   });
 }
@@ -169,8 +174,11 @@ class __$$WeatherDataImplCopyWithImpl<$Res>
 class _$WeatherDataImpl implements _WeatherData {
   const _$WeatherDataImpl({
     required final List<String> time,
+    @JsonKey(name: 'temperature_2m_max')
     required final List<double> temperature2mMax,
+    @JsonKey(name: 'temperature_2m_min')
     required final List<double> temperature2mMin,
+    @JsonKey(name: 'precipitation_probability_max')
     required final List<int> precipitationProbabilityMax,
   }) : _time = time,
        _temperature2mMax = temperature2mMax,
@@ -190,6 +198,7 @@ class _$WeatherDataImpl implements _WeatherData {
 
   final List<double> _temperature2mMax;
   @override
+  @JsonKey(name: 'temperature_2m_max')
   List<double> get temperature2mMax {
     if (_temperature2mMax is EqualUnmodifiableListView)
       return _temperature2mMax;
@@ -199,6 +208,7 @@ class _$WeatherDataImpl implements _WeatherData {
 
   final List<double> _temperature2mMin;
   @override
+  @JsonKey(name: 'temperature_2m_min')
   List<double> get temperature2mMin {
     if (_temperature2mMin is EqualUnmodifiableListView)
       return _temperature2mMin;
@@ -208,6 +218,7 @@ class _$WeatherDataImpl implements _WeatherData {
 
   final List<int> _precipitationProbabilityMax;
   @override
+  @JsonKey(name: 'precipitation_probability_max')
   List<int> get precipitationProbabilityMax {
     if (_precipitationProbabilityMax is EqualUnmodifiableListView)
       return _precipitationProbabilityMax;
@@ -267,8 +278,11 @@ class _$WeatherDataImpl implements _WeatherData {
 abstract class _WeatherData implements WeatherData {
   const factory _WeatherData({
     required final List<String> time,
+    @JsonKey(name: 'temperature_2m_max')
     required final List<double> temperature2mMax,
+    @JsonKey(name: 'temperature_2m_min')
     required final List<double> temperature2mMin,
+    @JsonKey(name: 'precipitation_probability_max')
     required final List<int> precipitationProbabilityMax,
   }) = _$WeatherDataImpl;
 
@@ -278,10 +292,13 @@ abstract class _WeatherData implements WeatherData {
   @override
   List<String> get time;
   @override
+  @JsonKey(name: 'temperature_2m_max')
   List<double> get temperature2mMax;
   @override
+  @JsonKey(name: 'temperature_2m_min')
   List<double> get temperature2mMin;
   @override
+  @JsonKey(name: 'precipitation_probability_max')
   List<int> get precipitationProbabilityMax;
 
   /// Create a copy of WeatherData
@@ -455,8 +472,7 @@ class __$$WeatherResponseImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$WeatherResponseImpl implements _WeatherResponse {
   const _$WeatherResponseImpl({
     required this.latitude,

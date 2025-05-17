@@ -10,6 +10,7 @@ class WeatherPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final weatherResponse = useState<WeatherResponse?>(null);
+    final error = useState<String?>(null);
 
     useEffect(() {
       Future(() async {
@@ -17,7 +18,7 @@ class WeatherPage extends HookWidget {
           final response = await WeatherApi.fetchWeatherData();
           weatherResponse.value = response;
         } catch (e) {
-          print('Error: $e');
+          error.value = e.toString();
         }
       });
       return null;
@@ -35,7 +36,9 @@ class WeatherPage extends HookWidget {
         title: Text('Weather App'),
       ),
       body:
-          weatherResponse.value == null
+          error.value != null
+              ? Center(child: Text('エラー: ${error.value}'))
+              : weatherResponse.value == null
               ? Center(
                 child: CircularProgressIndicator(color: Colors.lightBlueAccent),
               )

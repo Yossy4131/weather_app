@@ -10,15 +10,15 @@ _$WeatherDataImpl _$$WeatherDataImplFromJson(Map<String, dynamic> json) =>
     _$WeatherDataImpl(
       time: (json['time'] as List<dynamic>).map((e) => e as String).toList(),
       temperature2mMax:
-          (json['temperature2mMax'] as List<dynamic>)
+          (json['temperature_2m_max'] as List<dynamic>)
               .map((e) => (e as num).toDouble())
               .toList(),
       temperature2mMin:
-          (json['temperature2mMin'] as List<dynamic>)
+          (json['temperature_2m_min'] as List<dynamic>)
               .map((e) => (e as num).toDouble())
               .toList(),
       precipitationProbabilityMax:
-          (json['precipitationProbabilityMax'] as List<dynamic>)
+          (json['precipitation_probability_max'] as List<dynamic>)
               .map((e) => (e as num).toInt())
               .toList(),
     );
@@ -26,9 +26,9 @@ _$WeatherDataImpl _$$WeatherDataImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$WeatherDataImplToJson(_$WeatherDataImpl instance) =>
     <String, dynamic>{
       'time': instance.time,
-      'temperature2mMax': instance.temperature2mMax,
-      'temperature2mMin': instance.temperature2mMin,
-      'precipitationProbabilityMax': instance.precipitationProbabilityMax,
+      'temperature_2m_max': instance.temperature2mMax,
+      'temperature_2m_min': instance.temperature2mMin,
+      'precipitation_probability_max': instance.precipitationProbabilityMax,
     };
 
 _$WeatherResponseImpl _$$WeatherResponseImplFromJson(
@@ -46,5 +46,5 @@ Map<String, dynamic> _$$WeatherResponseImplToJson(
   'latitude': instance.latitude,
   'longitude': instance.longitude,
   'timezone': instance.timezone,
-  'daily': instance.daily.toJson(),
+  'daily': instance.daily,
 };

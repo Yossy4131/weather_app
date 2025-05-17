@@ -7,11 +7,11 @@ part 'weather_model.g.dart';
 class WeatherData with _$WeatherData {
   @JsonSerializable(explicitToJson: true)
   const factory WeatherData({
-    required List<String> time,
-    required List<double> temperature2mMax,
-    required List<double> temperature2mMin,
-    required List<int> precipitationProbabilityMax,
-  }) = _WeatherData;
+  required List<String> time,
+  @JsonKey(name: 'temperature_2m_max') required List<double> temperature2mMax,
+  @JsonKey(name: 'temperature_2m_min') required List<double> temperature2mMin,
+  @JsonKey(name: 'precipitation_probability_max') required List<int> precipitationProbabilityMax,
+}) = _WeatherData;
 
   factory WeatherData.fromJson(Map<String, dynamic> json) =>
       _$WeatherDataFromJson(json);
@@ -19,7 +19,6 @@ class WeatherData with _$WeatherData {
 
 @freezed
 class WeatherResponse with _$WeatherResponse {
-  @JsonSerializable(explicitToJson: true)
   const factory WeatherResponse({
     required double latitude,
     required double longitude,
