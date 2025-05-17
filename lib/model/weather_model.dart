@@ -1,45 +1,32 @@
-class WeatherData {
-  final List<String> time;
-  final List<double> temperature2mMax;
-  final List<double> temperature2mMin;
-  final List<int> precipitationProbabilityMax;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  WeatherData({
-    required this.time,
-    required this.temperature2mMax,
-    required this.temperature2mMin,
-    required this.precipitationProbabilityMax,
-  });
+part 'weather_model.freezed.dart';
+part 'weather_model.g.dart';
 
-  factory WeatherData.fromJson(Map<String, dynamic> json) {
-    return WeatherData(
-      time: List<String>.from(json['time']),
-      temperature2mMax: List<double>.from(json['temperature_2m_max']),
-      temperature2mMin: List<double>.from(json['temperature_2m_min']),
-      precipitationProbabilityMax: List<int>.from(json['precipitation_probability_max']),
-    );
-  }
+@freezed
+class WeatherData with _$WeatherData {
+  @JsonSerializable(explicitToJson: true)
+  const factory WeatherData({
+    required List<String> time,
+    required List<double> temperature2mMax,
+    required List<double> temperature2mMin,
+    required List<int> precipitationProbabilityMax,
+  }) = _WeatherData;
+
+  factory WeatherData.fromJson(Map<String, dynamic> json) =>
+      _$WeatherDataFromJson(json);
 }
 
-class WeatherResponse {
-  final double latitude;
-  final double longitude;
-  final String timezone;
-  final WeatherData daily;
+@freezed
+class WeatherResponse with _$WeatherResponse {
+  @JsonSerializable(explicitToJson: true)
+  const factory WeatherResponse({
+    required double latitude,
+    required double longitude,
+    required String timezone,
+    required WeatherData daily,
+  }) = _WeatherResponse;
 
-  WeatherResponse({
-    required this.latitude,
-    required this.longitude,
-    required this.timezone,
-    required this.daily,
-  });
-
-  factory WeatherResponse.fromJson(Map<String, dynamic> json) {
-    return WeatherResponse(
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-      timezone: json['timezone'],
-      daily: WeatherData.fromJson(json['daily'] as Map<String, dynamic>),
-    );
-  }
+  factory WeatherResponse.fromJson(Map<String, dynamic> json) =>
+      _$WeatherResponseFromJson(json);
 }
