@@ -41,16 +41,37 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 spacing: 10,
                 children: [
+                  SizedBox(height: 10),
                   Container(
                     width: 300,
                     height: 200,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.blue),
                       borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Icon(Icons.sunny),
+                          ),
+                        ),
+                        Positioned(top: 10, left: 10, child: Text('〇月〇日')),
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Text('〇〇℃/〇〇℃'),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Container(
@@ -68,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           spacing: 5,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('${index + 1}時'),
+                            Text('$index'),
                             Icon(Icons.sunny),
                             Text('〇℃'),
                           ],
@@ -80,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 400,
                     width: 300,
                     child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: 7,
                       itemBuilder: (context, index) {
                         return Padding(
