@@ -1,10 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../model/weather_model.dart';
+import '../repository/weather_api.dart';
+
 class WeatherPage extends HookWidget {
   const WeatherPage({super.key});
 
+  @override
   Widget build(BuildContext context) {
+    final weatherResponse = useState<WeatherResponse?>(null);
+
+    // useEffect(() {
+    //   Future(() async {
+    //     try {
+    //       final response = await WeatherApi.fetchWeatherData();
+    //       weatherResponse.value = response;
+    //       final dailyData = response.daily;
+
+    //       print('--- 宜野湾の週間天気予報 ---');
+    //       for (int i = 0; i < dailyData.time.length; i++) {
+    //         print('日付: ${dailyData.time[i]}');
+    //         print('最低気温: ${dailyData.temperature2mMin[i]}°C');
+    //         print('最高気温: ${dailyData.temperature2mMax[i]}°C');
+    //         print('降水確率: ${dailyData.precipitationProbabilityMax[i]}%');
+    //         print('---');
+    //       }
+    //     } catch (e) {
+    //       print('エラーが発生しました: $e');
+    //     }
+    //   });
+    //   return null;
+    // }, []);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlueAccent,
@@ -20,35 +48,48 @@ class WeatherPage extends HookWidget {
                 children: [
                   SizedBox(height: 10),
                   Container(
-                    width: 300,
+                    width: 400,
                     height: 200,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.blue),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Stack(
-                      children: [
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Icon(Icons.sunny),
-                          ),
-                        ),
-                        Positioned(top: 10, left: 10, child: Text('〇月〇日')),
-                        Positioned.fill(
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              child: Text('〇〇℃/〇〇℃'),
+                    child:
+                        weatherResponse.value == null
+                            ? Center(child: CircularProgressIndicator())
+                            : Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Icon(Icons.sunny),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 10,
+                                  left: 10,
+                                  child: Text(
+                                    '${weatherResponse.value!.daily.time[0].substring(5, 10)}',
+                                  ),
+                                ),
+                                Positioned.fill(
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 10,
+                                      ),
+                                      child: Text(
+                                        '${weatherResponse.value!.daily.temperature2mMax[0]}℃/${weatherResponse.value!.daily.temperature2mMin[0]}℃',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                   Container(
-                    width: 300,
+                    width: 400,
                     height: 100,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.blue),
@@ -72,7 +113,7 @@ class WeatherPage extends HookWidget {
                   ),
                   SizedBox(
                     height: 400,
-                    width: 300,
+                    width: 400,
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 7,
@@ -90,11 +131,17 @@ class WeatherPage extends HookWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               spacing: 5,
                               children: [
-                                Text('〇/〇 (〇)'),
+                                Text(
+                                  '${weatherResponse.value!.daily.time[index].substring(5, 10)} (〇)',
+                                ),
                                 Icon(Icons.sunny),
                                 Text('晴れ'),
-                                Text('〇〇/〇〇'),
-                                Text('降水確率 〇%'),
+                                Text(
+                                  '${weatherResponse.value!.daily.temperature2mMax[index]}℃/${weatherResponse.value!.daily.temperature2mMin[index]}℃',
+                                ),
+                                Text(
+                                  '降水確率 ${weatherResponse.value!.daily.precipitationProbabilityMax[index]}%',
+                                ),
                               ],
                             ),
                           ),

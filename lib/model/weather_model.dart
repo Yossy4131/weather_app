@@ -1,18 +1,18 @@
-class DailyWeatherData {
+class WeatherData {
   final List<String> time;
   final List<double> temperature2mMax;
   final List<double> temperature2mMin;
   final List<int> precipitationProbabilityMax;
 
-  DailyWeatherData({
+  WeatherData({
     required this.time,
     required this.temperature2mMax,
     required this.temperature2mMin,
     required this.precipitationProbabilityMax,
   });
 
-  factory DailyWeatherData.fromJson(Map<String, dynamic> json) {
-    return DailyWeatherData(
+  factory WeatherData.fromJson(Map<String, dynamic> json) {
+    return WeatherData(
       time: List<String>.from(json['time']),
       temperature2mMax: List<double>.from(json['temperature_2m_max']),
       temperature2mMin: List<double>.from(json['temperature_2m_min']),
@@ -25,7 +25,7 @@ class WeatherResponse {
   final double latitude;
   final double longitude;
   final String timezone;
-  final DailyWeatherData daily;
+  final WeatherData daily;
 
   WeatherResponse({
     required this.latitude,
@@ -39,7 +39,7 @@ class WeatherResponse {
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
       timezone: json['timezone'],
-      daily: DailyWeatherData.fromJson(json['daily'] as Map<String, dynamic>),
+      daily: WeatherData.fromJson(json['daily'] as Map<String, dynamic>),
     );
   }
 }
