@@ -33,10 +33,33 @@ class TodayWeather extends StatelessWidget {
           Positioned.fill(
             child: Align(
               alignment: Alignment.center,
-              child:
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 5,
+                children: [
                   JudgeWeather(
-                    precipitationProbabilityMax: precipitationProbabilityMax!,
-                  ).weatherIcon,
+                        precipitationProbabilityMax:
+                            precipitationProbabilityMax!,
+                        size: 45,
+                      ).weatherIcon ??
+                      SizedBox.shrink(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        JudgeWeather(
+                              precipitationProbabilityMax:
+                                  precipitationProbabilityMax!,
+                            ).weatherText ??
+                            '',
+                      ),
+                      SizedBox(width: 5),
+                      Icon(Icons.water_drop, size: 15, color: Colors.blue),
+                      Text('$precipitationProbabilityMax%'),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Positioned(

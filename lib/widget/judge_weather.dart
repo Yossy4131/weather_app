@@ -5,17 +5,22 @@ class JudgeWeather {
   final int precipitationProbabilityMax;
   String? weatherText;
   Icon? weatherIcon;
+  double? size;
 
-  JudgeWeather({required this.precipitationProbabilityMax}) {
+  JudgeWeather({required this.precipitationProbabilityMax, this.size}) {
     if (precipitationProbabilityMax >= 70) {
       weatherText = '雨';
-      weatherIcon = Icon(WeatherIcons.rain, color: Colors.blue);
+      weatherIcon = Icon(WeatherIcons.rain, size: size, color: Colors.blue);
     } else if (precipitationProbabilityMax >= 30) {
       weatherText = '曇り';
-      weatherIcon = Icon(WeatherIcons.cloud, color: Colors.grey);
+      weatherIcon = Icon(WeatherIcons.cloud, size: size, color: Colors.grey);
     } else {
       weatherText = '晴れ';
-      weatherIcon = Icon(WeatherIcons.day_sunny, color: Colors.orange);
+      weatherIcon = Icon(
+        WeatherIcons.day_sunny,
+        size: size,
+        color: Colors.orange,
+      );
     }
   }
 
