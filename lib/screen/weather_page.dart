@@ -18,7 +18,7 @@ class WeatherPage extends HookWidget {
     useEffect(() {
       Future(() async {
         try {
-          final response = await WeatherApi.fetchWeatherData();
+          final response = await WeatherWeekApi.fetchWeatherData();
           weatherResponse.value = response;
         } catch (e) {
           error.value = e.toString();
@@ -64,8 +64,9 @@ class WeatherPage extends HookWidget {
                             date: date,
                             temperatureMax: temperatureMax,
                             temperatureMin: temperatureMin,
-                            precipitationProbabilityMax: precipitationProbabilityMax
-                            ),
+                            precipitationProbabilityMax:
+                                precipitationProbabilityMax,
+                          ),
                         ],
                       ),
                     ),

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 import '../model/weather_model.dart';
 
-class WeatherApi {
+class WeatherWeekApi {
   static const String _baseUrl = 'https://api.open-meteo.com/v1/forecast';
   static const double _latitudeGinowan = 26.2803;
   static const double _longitudeGinowan = 127.9700;
