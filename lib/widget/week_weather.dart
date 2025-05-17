@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'judge_weather.dart';
+
 class WeekWeather extends StatelessWidget {
   final List<String>? date;
   final List<double>? temperatureMax;
@@ -36,9 +38,13 @@ class WeekWeather extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 5,
                 children: [
-                  Text('${date?[index].substring(5, 10)} (〇)'),
-                  Icon(Icons.sunny),
-                  Text('晴れ'),
+                  Text('${date?[index].substring(5, 10)}'),
+                  Text('(〇)'),
+                  JudgeWeather(
+                        precipitationProbabilityMax:
+                            precipitationProbabilityMax![index],
+                      ).WeatherTextIcon() ??
+                      SizedBox(),
                   Text('${temperatureMax?[index]}℃/${temperatureMin?[index]}℃'),
                   Text('降水確率 ${precipitationProbabilityMax?[index]}%'),
                 ],

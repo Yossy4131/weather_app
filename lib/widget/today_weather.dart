@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'judge_weather.dart';
 
 class TodayWeather extends StatelessWidget {
   final String? today;
   final String? temperatureMax;
   final String? temperatureMin;
+  final int? precipitationProbabilityMax;
 
   const TodayWeather({
     super.key,
     required this.today,
     required this.temperatureMax,
     required this.temperatureMin,
+    required this.precipitationProbabilityMax,
   });
 
   @override
@@ -24,7 +27,7 @@ class TodayWeather extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Align(alignment: Alignment.center, child: Icon(Icons.sunny)),
+            child: Align(alignment: Alignment.center, child: JudgeWeather(precipitationProbabilityMax: precipitationProbabilityMax!).weatherIcon),
           ),
           Positioned(top: 10, left: 10, child: Text(today!)),
           Positioned.fill(
