@@ -6,8 +6,6 @@ part 'weather_model.g.dart';
 @freezed
 @JsonSerializable(explicitToJson: true)
 class WeatherData with _$WeatherData {
-  const WeatherData._();
-
   const factory WeatherData({
     required List<String> time,
     required List<double> temperature2mMax,
