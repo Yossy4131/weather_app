@@ -5,16 +5,16 @@ import '../model/weather_model.dart';
 
 class WeatherWeekApi {
   static const String _baseUrl = 'https://api.open-meteo.com/v1/forecast';
-  static const double _latitudeGinowan = 26.2803;
-  static const double _longitudeGinowan = 127.9700;
+  static const double _latitude = 26.2803;
+  static const double _longitude = 127.9700;
   static const String _timezone = 'Asia/Tokyo';
   static const int _forecastDays = 7;
 
   static Future<WeatherResponse> fetchWeatherData() async {
     final Uri url = Uri.parse(
       '$_baseUrl?'
-      'latitude=$_latitudeGinowan&'
-      'longitude=$_longitudeGinowan&'
+      'latitude=$_latitude&'
+      'longitude=$_longitude&'
       'daily=temperature_2m_min,temperature_2m_max,precipitation_probability_max&'
       'timezone=$_timezone&'
       'forecast_days=$_forecastDays',
