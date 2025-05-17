@@ -9,13 +9,13 @@ class JudgeWeather {
   JudgeWeather({required this.precipitationProbabilityMax}) {
     if (precipitationProbabilityMax >= 70) {
       weatherText = '雨';
-      weatherIcon = Icon(WeatherIcons.rain,color: Colors.blue,);
+      weatherIcon = Icon(WeatherIcons.rain, color: Colors.blue);
     } else if (precipitationProbabilityMax >= 30) {
       weatherText = '曇り';
-      weatherIcon = Icon(WeatherIcons.cloud,color: Colors.grey,);
+      weatherIcon = Icon(WeatherIcons.cloud, color: Colors.grey);
     } else {
       weatherText = '晴れ';
-      weatherIcon = Icon(WeatherIcons.day_sunny,color: Colors.orange,);
+      weatherIcon = Icon(WeatherIcons.day_sunny, color: Colors.orange);
     }
   }
 
@@ -27,12 +27,9 @@ class JudgeWeather {
     return weatherIcon;
   }
 
-  Row? WeatherTextIcon(){
+  Row? WeatherTextIcon() {
     return Row(
-      children: [
-        weatherIcon!,
-        Text(weatherText!)
-      ],
+      children: [weatherIcon!, SizedBox(width: 10), Text(weatherText!)],
     );
   }
 }

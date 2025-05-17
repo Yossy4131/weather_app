@@ -38,8 +38,9 @@ class WeekWeather extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  SizedBox(width: 10),
                   Text(
                     '${date![index].substring(5, 7)}/${date![index].substring(8, 10)}',
                   ),
@@ -49,8 +50,21 @@ class WeekWeather extends StatelessWidget {
                             precipitationProbabilityMax![index],
                       ).WeatherTextIcon() ??
                       SizedBox(),
-                  Text('${temperatureMax?[index]}℃/${temperatureMin?[index]}℃'),
-                  Text('降水確率 ${precipitationProbabilityMax?[index]}%'),
+                  Text(
+                    '${temperatureMax?[index]}',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  Text('/'),
+                  Text(
+                    '${temperatureMin?[index]}',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  Text('降水確率'),
+                  Text(
+                    ' ${precipitationProbabilityMax?[index]}%',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  SizedBox(width: 10),
                 ],
               ),
             ),
