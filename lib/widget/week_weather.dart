@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'judge_weather.dart';
+import 'week.dart';
 
 class WeekWeather extends StatelessWidget {
   final List<String>? date;
@@ -25,6 +26,8 @@ class WeekWeather extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 7,
         itemBuilder: (context, index) {
+          String weekday = Week(date: date![index]).getWeekday();
+
           return Padding(
             padding: const EdgeInsets.all(3.0),
             child: Container(
@@ -36,10 +39,11 @@ class WeekWeather extends StatelessWidget {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 5,
                 children: [
-                  Text('${date?[index].substring(5, 10)}'),
-                  Text('(〇)'),
+                  Text(
+                    '${date![index].substring(5, 7)}/${date![index].substring(8, 10)}',
+                  ),
+                  Text('($weekday)'),
                   JudgeWeather(
                         precipitationProbabilityMax:
                             precipitationProbabilityMax![index],

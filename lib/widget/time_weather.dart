@@ -7,7 +7,7 @@ class TimeWeather extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 400,
-      height: 100,
+      height: 150,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.circular(20),
@@ -19,7 +19,12 @@ class TimeWeather extends StatelessWidget {
           return Column(
             spacing: 5,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text('$index'), Icon(Icons.sunny), Text('〇℃')],
+            children: [
+              Text('$index'),
+              Icon(Icons.sunny),
+              Text('〇℃'),
+              Text('〇%'),
+            ],
           );
         },
       ),

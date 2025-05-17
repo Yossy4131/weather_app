@@ -19,7 +19,7 @@ class TodayWeather extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 400,
-      height: 200,
+      height: 150,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.blue),
         borderRadius: BorderRadius.circular(20),
@@ -27,9 +27,23 @@ class TodayWeather extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Align(alignment: Alignment.center, child: JudgeWeather(precipitationProbabilityMax: precipitationProbabilityMax!).weatherIcon),
+            child: Align(
+              alignment: Alignment.center,
+              child:
+                  JudgeWeather(
+                    precipitationProbabilityMax: precipitationProbabilityMax!,
+                  ).weatherIcon,
+            ),
           ),
-          Positioned(top: 10, left: 10, child: Text(today!)),
+          Positioned(
+            top: 10,
+            left: 10,
+            child: Text(
+              today != null
+                  ? '${int.parse(today!.substring(5, 7))}月${int.parse(today!.substring(8, 10))}日'
+                  : '',
+            ),
+          ),
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,

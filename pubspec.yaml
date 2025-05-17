@@ -17,6 +17,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_annotation: ^4.9.0
   weather_icons: 
+  intl: 
 
 dev_dependencies:
   flutter_test:
