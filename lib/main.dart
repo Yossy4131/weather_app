@@ -11,6 +11,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const WeatherPage());
+    return MaterialApp(
+      home: const WeatherPage(latitude: 26.2803, longitude: 127.9700),
+    );
   }
 }

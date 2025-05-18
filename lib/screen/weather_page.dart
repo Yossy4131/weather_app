@@ -9,16 +9,20 @@ import '../widget/time_weather.dart';
 import '../widget/week_weather.dart';
 
 class WeatherPage extends HookWidget {
-  const WeatherPage({super.key});
+  final double latitude;
+  final double longitude;
+
+  const WeatherPage({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+  });
 
   @override
   Widget build(BuildContext context) {
     final weekWeatherResponse = useState<WeekWeatherResponse?>(null);
     final dayWeatherResponse = useState<DayWeatherResponse?>(null);
     final error = useState<String?>(null);
-
-    final double latitude = 26.2803;
-    final double longitude = 127.9700;
 
     useEffect(() {
       Future(() async {
