@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../model/weather_model.dart';
+import '../model/week_weather_model.dart';
+import '../model/day_weather_model.dart';
 import '../repository/weather_api.dart';
 import '../widget/today_weather.dart';
 import '../widget/time_weather.dart';
@@ -12,18 +13,25 @@ class WeatherPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weatherResponse = useState<WeatherResponse?>(null);
+    final weekWeatherResponse = useState<WeekWeatherResponse?>(null);
+    final dayWeatherResponse = useState<DayWeatherResponse?>(null);
     final error = useState<String?>(null);
 
     useEffect(() {
       Future(() async {
         try {
-          final response =
-              await WeatherWeekApi(
+          final weekResponse =
+              await WeatherApi(
                 latitude: 26.2803,
                 longitude: 127.9700,
-              ).fetchWeatherData();
-          weatherResponse.value = response;
+              ).fetchWeekWeatherData();
+          weekWeatherResponse.value = weekResponse;
+          final dayResponse =
+              await WeatherApi(
+                latitude: 26.2803,
+                longitude: 127.9700,
+              ).fetchDayWeatherData();
+          dayWeatherResponse.value = dayResponse;
         } catch (e) {
           error.value = e.toString();
         }
@@ -31,11 +39,15 @@ class WeatherPage extends HookWidget {
       return null;
     }, []);
 
-    final date = weatherResponse.value?.daily.time;
-    final temperatureMax = weatherResponse.value?.daily.temperature2mMax;
-    final temperatureMin = weatherResponse.value?.daily.temperature2mMin;
+    final date = weekWeatherResponse.value?.daily.time;
+    final temperatureMax = weekWeatherResponse.value?.daily.temperature2mMax;
+    final temperatureMin = weekWeatherResponse.value?.daily.temperature2mMin;
     final precipitationProbabilityMax =
-        weatherResponse.value?.daily.precipitationProbabilityMax;
+        weekWeatherResponse.value?.daily.precipitationProbabilityMax;
+    final time = dayWeatherResponse.value?.hourly.time;
+    final temperature2m = dayWeatherResponse.value?.hourly.temperature2m;
+    final precipitationProbability =
+        dayWeatherResponse.value?.hourly.precipitationProbability;
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +57,8 @@ class WeatherPage extends HookWidget {
       body:
           error.value != null
               ? Center(child: Text('エラー: ${error.value}'))
-              : weatherResponse.value == null
+              : weekWeatherResponse.value == null &&
+                  dayWeatherResponse.value == null
               ? Center(
                 child: CircularProgressIndicator(color: Colors.lightBlueAccent),
               )
@@ -65,7 +78,11 @@ class WeatherPage extends HookWidget {
                             precipitationProbabilityMax:
                                 precipitationProbabilityMax?[0],
                           ),
-                          TimeWeather(),
+                          TimeWeather(
+                            time: time,
+                            temperature2m: temperature2m,
+                            precipitationProbability: precipitationProbability,
+                          ),
                           WeekWeather(
                             date: date,
                             temperatureMax: temperatureMax,
