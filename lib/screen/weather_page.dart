@@ -17,19 +17,22 @@ class WeatherPage extends HookWidget {
     final dayWeatherResponse = useState<DayWeatherResponse?>(null);
     final error = useState<String?>(null);
 
+    final double latitude = 26.2803;
+    final double longitude = 127.9700;
+
     useEffect(() {
       Future(() async {
         try {
           final weekResponse =
               await WeatherApi(
-                latitude: 26.2803,
-                longitude: 127.9700,
+                latitude: latitude,
+                longitude: longitude,
               ).fetchWeekWeatherData();
           weekWeatherResponse.value = weekResponse;
           final dayResponse =
               await WeatherApi(
-                latitude: 26.2803,
-                longitude: 127.9700,
+                latitude: latitude,
+                longitude: longitude,
               ).fetchDayWeatherData();
           dayWeatherResponse.value = dayResponse;
         } catch (e) {
