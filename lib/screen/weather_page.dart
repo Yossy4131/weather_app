@@ -64,8 +64,7 @@ class WeatherPage extends HookWidget {
       body:
           error.value != null
               ? Center(child: Text('エラー: ${error.value}'))
-              : weekWeatherResponse.value == null &&
-                  dayWeatherResponse.value == null
+              : dayWeatherResponse.value == null
               ? Center(
                 child: CircularProgressIndicator(color: Colors.lightBlueAccent),
               )
