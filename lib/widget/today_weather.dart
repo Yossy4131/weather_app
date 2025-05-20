@@ -43,6 +43,7 @@ class TodayWeather extends StatelessWidget {
                         size: 45,
                       ).weatherIcon ??
                       SizedBox.shrink(),
+                  SizedBox(height: 1),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
